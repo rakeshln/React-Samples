@@ -30,7 +30,9 @@ class App extends Component {
       </ul>
       <Prompt 
       when={!this.state.loggedIn}
-      message="You have not logged in" />
+      message={(location) =>{
+        return location.pathname.startsWith("/user") ? 'You are not logged in' : true
+      }} />
         <input type="button" value={this.state.loggedIn ? "Log Out" : "Log In"}  onClick={this.loginHdlr.bind(this)}/>
       <div>
         <Route path="/" exact strict render={
