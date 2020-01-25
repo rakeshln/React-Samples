@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link, NavLink } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, NavLink , Redirect} from "react-router-dom";
 import './App.css';
 
-const User = ({ match }) => {
-  return (<div>Welcome {match.params.username}</div>);
+const User = ( params ) => {
+  return (<div>Welcome {params.username}</div>);
 }
 
 class App extends Component {
@@ -13,7 +13,9 @@ class App extends Component {
   }
 
   loginHdlr = () => {
-
+    this.setState(prevState => ({
+      loggedIn: !prevState.loggedIn
+    }))
   }
 
   render() {
@@ -26,7 +28,7 @@ class App extends Component {
           {color:'green'}
         }>User</NavLink></li>
       </ul>
-        <input type="button" value="Log In" onClick={this.loginHdlr.bind(this)}/>
+        <input type="button" value={this.state.loggedIn ? "Log Out" : "Log In"}  onClick={this.loginHdlr.bind(this)}/>
       <div>
         <Route path="/" exact strict render={
           () => {
@@ -38,7 +40,11 @@ class App extends Component {
             return <div>About</div>
           }
         }></Route>
-        <Route path="/user/:username" exact strict component={User} />
+        <Route path="/user/:username" exact strict render={
+          ({match}) => (
+            this.state.loggedIn ? (<User username={match.params.username}/>) : <Redirect to="/" />
+          )
+        } />
       </div>
     </Router>
   }
