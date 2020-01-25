@@ -8,6 +8,14 @@ const User = ({ match }) => {
 
 class App extends Component {
 
+  state ={
+    loggedIn:false
+  }
+
+  loginHdlr = () => {
+
+  }
+
   render() {
     return <Router>
       <ul>
@@ -18,7 +26,7 @@ class App extends Component {
           {color:'green'}
         }>User</NavLink></li>
       </ul>
-
+        <input type="button" value="Log In" onClick={this.loginHdlr.bind(this)}/>
       <div>
         <Route path="/" exact strict render={
           () => {
