@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link, NavLink , Redirect} from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, NavLink , Redirect, Prompt} from "react-router-dom";
 import './App.css';
 
 const User = ( params ) => {
@@ -28,6 +28,9 @@ class App extends Component {
           {color:'green'}
         }>User</NavLink></li>
       </ul>
+      <Prompt 
+      when={!this.state.loggedIn}
+      message="You have not logged in" />
         <input type="button" value={this.state.loggedIn ? "Log Out" : "Log In"}  onClick={this.loginHdlr.bind(this)}/>
       <div>
         <Route path="/" exact strict render={
