@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import {BrowserRouter as Router, Route} from "react-router-dom";
 import './App.css';
 
-const Abt = () =>{
-  return (<div>About from Component</div>);
+const User = ({match}) =>{
+return (<div>Welcome {match.params.username}</div>);
 }
 
 class App extends Component{
@@ -11,7 +11,7 @@ class App extends Component{
   render(){
     return <Router>
       <div>
-        <Route path="/c" exact strict render={
+        <Route path="/" exact strict render={
           () => {
             return <div>Home</div>
           }
@@ -21,7 +21,7 @@ class App extends Component{
             return <div>About</div>
           }
         }></Route>
-        <Route path="/" exact  component={Abt}/>
+        <Route path="/user/:username" exact strict component={User}/>
       </div>
     </Router>
   }
