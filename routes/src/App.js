@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, NavLink } from "react-router-dom";
 import './App.css';
 
 const User = ({ match }) => {
@@ -11,8 +11,12 @@ class App extends Component {
   render() {
     return <Router>
       <ul>
-        <li><Link to="/about">About</Link></li>
-        <li><Link to="/user/John">User</Link></li>
+        <li><NavLink to="/about" exact activeStyle={
+          {color:'green'}
+        }>About</NavLink></li>
+        <li><NavLink to="/user/John" exact activeStyle={
+          {color:'green'}
+        }>User</NavLink></li>
       </ul>
 
       <div>
